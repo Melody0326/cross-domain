@@ -80,10 +80,12 @@ jquery中对jsonp的支持也是基于此方案。
 
 以jQuery2.1.3的ajax方法为例
 
+$.ajax
 
-$.ajax(
-{
+({
+
     url:"",
+    
     dataType:"jsonp",
     
     data:{
@@ -93,6 +95,7 @@ $.ajax(
         }
         
 }).done(function(data){
+
     //dosomething..
 })
 
