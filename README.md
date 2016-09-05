@@ -80,8 +80,10 @@ jquery中对jsonp的支持也是基于此方案。
 
 以jQuery2.1.3的ajax方法为例
 
-$.ajax({url:"",
-    
+
+$.ajax(
+{
+    url:"",
     dataType:"jsonp",
     
     data:{
@@ -91,7 +93,8 @@ $.ajax({url:"",
         }
         
 }).done(function(data){
-    //dosomething..})
+    //dosomething..
+})
 
 仅仅是客户端使用jsonp请求数据是不行的，因为jsonp的请求是放在script标签中的，和普通请求不同的地方在于，它请求到的是一段js代码，如果服务端返回了json字符串，那么浏览器就会报错。所以jsonp返回数据需要服务端做一些处理。
 
