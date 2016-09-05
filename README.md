@@ -26,7 +26,7 @@
 *服务端设置Request Header头中Access-Control-Allow-Origin为指定可获取数据的域名
 *其他简单的跨域技术,例如图像Ping, flash, CORS
 
-####1.JSONP的解决方式
+####1.JSONP
 
 原理
 jsonp由两部分组成：回调函数和数据。回调函数就是当请求返回时在页面中调用的函数。数据就是传入回调函数中的json数据。
