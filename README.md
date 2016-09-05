@@ -77,46 +77,7 @@ $.ajax({
 /**/ typeof jQuery21307270454438403249_1428044213638 === 'function' && jQuery21307270454438403249_1428044213638({"code":1,"msg":"success","data":{"test":"test"}});
 
 ###2.iframe
-基于iframe实现的跨域要求两个域具有aa.xx.com,bb.xx.com这种特点，也就是两个页面必须属于一个基础域（例如都是xxx.com，或是xxx.com.cn），使用同一协议（例如都是 http）和同一端口（例如都是80），这样在两个页面中同时添加document.domain，就可以实现父页面调用子页面的函数。
-
-####代码如下：
-a.html
-<html>  
-<head>  
-  <script>
-   document.domain = "xx.com";  
-    function aa(){  
-      alert("p");  
-   }  
-  </script>  
-</head>  
-<body>  
-   <iframe src="http://localhost:8080/CmsUI/2.html" id="i">  
-   </iframe>  
-   <script>  
-  document.getElementById('i').onload = function(){  
-     var d = document.getElementById('i').contentWindow;  
-     d.a();  
-       
- };  
-   </script>  
- </body>  
-</html>  
-
-b.html
-<html>  
- <head>  
-  <script>  
-    document.domain = "xx.com";  
-    function a(){  
-    alert("c");  
-     }  
-  </script>  
- </head>  
- <body>  
- </body>  
-</html>  
-这时候父页面就可以调用子页面的a函数，实现js跨域访问。
+基于iframe实现的跨域要求两个域具有aa.xx.com,bb.xx.com这种特点，也就是两个页面必须属于一个基础域（例如都是xxx.com，或是xxx.com.cn），使用同一协议（例如都是 http）和同一端口（例如都是80），这样在两个页面中同时添加document.domain，就可以实现父页面调用子页面的函数,实现js跨域访问。
 
 iframe会存在以下的问题：
 1、安全性，当一个站点被攻击后，另一个站点会引起安全漏洞。
