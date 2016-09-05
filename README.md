@@ -26,7 +26,7 @@
 *服务端设置Request Header头中Access-Control-Allow-Origin为指定可获取数据的域名
 *其他简单的跨域技术,例如图像Ping, flash, CORS
 
-###1.JSONP的解决方式
+####1.JSONP的解决方式
 
 原理
 jsonp由两部分组成：回调函数和数据。回调函数就是当请求返回时在页面中调用的函数。数据就是传入回调函数中的json数据。
@@ -35,7 +35,7 @@ jsonp解决跨域问题的原理是，浏览器的script标签是不受同源策
 简单来说就是jsonp在前端声明数据，利用script传递给后端，后端调用数据，把传过来的参数当作实参并构造函数调用。
 jsonp相对简单，但只支持GET方式调用。
 
-####实现方法
+#####实现方法
 jsonp.html
 var url = "http://localhost:1335/ajax/jsonp.php?name=太阳&sex=女&callbackname=jsonp_callback"; 
 //访问localhost:1335下的jsonp.php
@@ -69,28 +69,28 @@ $.ajax({
 
 仅仅是客户端使用jsonp请求数据是不行的，因为jsonp的请求是放在script标签中的，和普通请求不同的地方在于，它请求到的是一段js代码，如果服务端返回了json字符串，那么浏览器就会报错。所以jsonp返回数据需要服务端做一些处理。
 
-###服务端返回数据处理
+####服务端返回数据处理
 
 上面说了jsonp的原理是利用script标签来解决跨域，但是script标签是用来获取js代码的，那么我们怎么获取到请求的数据呢。
 
 这就需要服务端做一些判断，当参数中带有callback属性时，返回的type要为application/javascript，把数据作为callback的参数执行。下面是jsonp返回的数据的格式示例
 /**/ typeof jQuery21307270454438403249_1428044213638 === 'function' && jQuery21307270454438403249_1428044213638({"code":1,"msg":"success","data":{"test":"test"}});
 
-###2.iframe
+####2.iframe
 基于iframe实现的跨域要求两个域具有aa.xx.com,bb.xx.com这种特点，也就是两个页面必须属于一个基础域（例如都是xxx.com，或是xxx.com.cn），使用同一协议（例如都是 http）和同一端口（例如都是80），这样在两个页面中同时添加document.domain，就可以实现父页面调用子页面的函数,实现js跨域访问。
 
 iframe会存在以下的问题：
 1、安全性，当一个站点被攻击后，另一个站点会引起安全漏洞。
 2、如果一个页面中引入多个iframe，要想能够操作所有iframe，必须都得设置相同domain。
 
-###3.XHR2
+####3.XHR2
 高版本浏览器支持html5的话，还可以使用XHR2支持跨域通信的新特性。如果你是移动端开发，可以选择使用XHR2。
 这需要在远程服务器端添加如下代码：
 header('Access-Control-Allow-Origin:*'); //*代表可访问的地址，可以设置指定域名
 header('Access-Control-Allow-Methods:POST,GET');
 这样在客户端使用常规的AJAX代码即可。
 
-###4.代理
+####4.代理
 这种方式可以解决所有跨域问题，也就是将后台作为代理，每次对其它域的请求转交给本域的后台，本域的后台通过模拟http请求去访问其它域，再将返回的结果返回给前台，这样做的好处是，无论访问的是文档，还是js文件都可以实现跨域。
 代理实现最麻烦，但使用最广泛，任何支持AJAX的浏览器都可以使用这种方式。
 
