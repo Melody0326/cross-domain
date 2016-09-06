@@ -20,17 +20,17 @@
 
 解决跨域问题有以下几种方式，这里只简单阐述几种常用的技术
 
-*使用jsonp
+* 使用jsonp
 
-*通过iframe
+* 通过iframe
 
-*通过XHR2
+* 通过XHR2
 
-*服务端代理
+* 服务端代理
 
-*服务端设置Request Header头中Access-Control-Allow-Origin为指定可获取数据的域名
+* 服务端设置Request Header头中Access-Control-Allow-Origin为指定可获取数据的域名
 
-*其他简单的跨域技术,例如图像Ping, flash, CORS
+* 其他简单的跨域技术,例如图像Ping, flash, CORS
 
 
 ####1.JSONP
