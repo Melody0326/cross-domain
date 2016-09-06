@@ -47,6 +47,7 @@ jsonp相对简单，但只支持GET方式调用。
 
 jsonp.html
 
+```
 var url = "http://localhost:1335/ajax/jsonp.php?name=太阳&sex=女&callbackname=jsonp_callback"; 
 
 //访问localhost:1335下的jsonp.php
@@ -60,13 +61,17 @@ document.body.appendChild(scriptTag); //将script标签添加到body中
 //回调函数
 
 var jsonp_callback = function(resultObj){
+
 document.getElementById("box").innerHTML = resultObj.name+":"+resultObj.sex;
+
 }
+```
 
 这样通过动态创建script标签就可以加载其它域的js文件，然后通过本页面就可以调用加载后js文件的函数，这样做的缺陷就是不能加载其它域的文档，只能是js文件，jsonp便是通过这种方式实现的，jsonp通过向其它域传入一个callback参数，通过其他域的后台将callback参数值和json串包装成javascript函数返回，因为是通过script标签发出的请求，浏览器会将返回来的字符串按照javascript进行解析执行，实现了域与域之间的数据传输。
 
 jsonp.php
 
+```
 $name = $_GET["name"];
 
 $sex = $_GET["sex"];
@@ -74,15 +79,15 @@ $sex = $_GET["sex"];
 $callbackname = $_GET["callbackname"]; //回调函数名称
 
 echo "$callbackname({name:'$name',sex:'$sex'})";
+```
 
 
 jquery中对jsonp的支持也是基于此方案。 
 
 以jQuery2.1.3的ajax方法为例
 
-$.ajax
-
-({
+```
+$.ajax({
 
     url:"",
     
@@ -97,7 +102,9 @@ $.ajax
 }).done(function(data){
 
     //dosomething..
+    
 })
+```
 
 仅仅是客户端使用jsonp请求数据是不行的，因为jsonp的请求是放在script标签中的，和普通请求不同的地方在于，它请求到的是一段js代码，如果服务端返回了json字符串，那么浏览器就会报错。所以jsonp返回数据需要服务端做一些处理。
 
@@ -107,7 +114,9 @@ $.ajax
 
 这就需要服务端做一些判断，当参数中带有callback属性时，返回的type要为application/javascript，把数据作为callback的参数执行。下面是jsonp返回的数据的格式示例
 
+```
 /**/ typeof jQuery21307270454438403249_1428044213638 === 'function' && jQuery21307270454438403249_1428044213638({"code":1,"msg":"success","data":{"test":"test"}});
+```
 
 
 ####2.iframe
@@ -126,9 +135,11 @@ iframe会存在以下的问题：
 
 这需要在远程服务器端添加如下代码：
 
+```
 header('Access-Control-Allow-Origin:*'); //*代表可访问的地址，可以设置指定域名
 
 header('Access-Control-Allow-Methods:POST,GET');
+```
 
 这样在客户端使用常规的AJAX代码即可。
 
